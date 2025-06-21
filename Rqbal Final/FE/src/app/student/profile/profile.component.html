@@ -1,0 +1,63 @@
+<div class="profile-container">
+  <h3 class="profile-header">بيانات شخصية</h3>
+  
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    {{ error }}
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="userProfile" class="profile-content">
+    <!-- Basic Info Section -->
+    <div class="basic-info-card profile-card">
+      <div class="basic-info-content">
+        <div class="name-role">
+          <span class="name">{{ userProfile.profile.full_name || userProfile.username }}</span>
+          <span class="role">{{ userProfile.profile.role }}</span>
+        </div>
+        <div class="contact-info">
+          <span class="email">{{ userProfile.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Info Section -->
+    <div class="detailed-info-card profile-card">
+      <div class="info-item">
+        <span class="info-label">اسم المستخدم:</span>
+        <span class="info-value">{{ userProfile.username }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">البريد الإلكتروني:</span>
+        <span class="info-value">{{ userProfile.email }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">نوع المستخدم:</span>
+        <span class="info-value">{{ userProfile.user_type }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">القسم:</span>
+        <span class="info-value">{{ userProfile.profile.program || 'غير محدد' }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">رقم الهاتف:</span>
+        <span class="info-value">{{ userProfile.profile.mobile || 'غير محدد' }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">رقم المحمول:</span>
+        <span class="info-value">{{ userProfile.profile.phone_number || 'غير محدد' }}</span>
+      </div>
+    
+    </div>
+  </div>
+
+  <!-- No Data State -->
+  <div *ngIf="!userProfile && !loading && !error" class="no-data-state">
+    لا توجد بيانات شخصية متاحة
+  </div>
+</div>

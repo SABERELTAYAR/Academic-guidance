@@ -1,0 +1,100 @@
+<div class="flex flex-col gap-[52px] pb-[30px]">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="w-full flex justify-center py-12">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#042A4F]"></div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+    {{ error }}
+  </div>
+
+  <!-- Schedule Content -->
+  <div *ngIf="studentSchedule && !loading">
+    <!-- Course Schedule -->
+    <div class="flex flex-col">
+      <h4 class="font-[600] text-[15px]">الجدول الدراسي ل{{ studentSchedule.semester }}</h4>
+      <div class="mt-[19px] w-full border-t-[7px] border-[#042A4F] rounded-t-xl">
+        <table class="w-full border-t-[7px] border-[#042A4F] bg-white overflow-hidden rounded-xl shadow-md">
+          <thead class="border border-gray-300">
+            <tr class="text-[15px] font-[400] text-gray-400">
+              <th class="border border-gray-300 px-[5px] pb-px">
+                <div class="flex flex-col px-2 relative">
+                  <span class="text-end">الفتره</span>
+                  <span class="text-start">اليوم</span>
+                  <hr class="absolute top-[25px] start-[5px] h-[1px] rotate-[144deg] bg-[#95A2AD] w-full"/>
+                </div>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الاولي</span>
+                <span>من ٩.٠٠ الي ١١.٠٠</span>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الثانيه</span>
+                <span>من ١١.٠٠ الي ١.٠٠</span>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الثالثه</span>
+                <span>من ١.٠٠ الي ٣.٠٠</span>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الرابعه</span>
+                <span>من ٣.٠٠ الي ٥.٠٠</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-center text-[15px] font-[600]">
+            <tr *ngFor="let day of studentSchedule.courseSchedule" class="hover:bg-gray-100">
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ day.day }}</td>
+              <td class="border border-gray-300 py-[15px] px-[5px]" [innerHTML]="day.period1"></td>
+              <td class="border border-gray-300 py-[15px] px-[5px]" [innerHTML]="day.period2"></td>
+              <td class="border border-gray-300 py-[15px] px-[5px]" [innerHTML]="day.period3"></td>
+              <td class="border border-gray-300 py-[15px] px-[5px]" [innerHTML]="day.period4"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Exam Schedule -->
+    <div class="flex flex-col">
+      <h4 class="font-[600] text-[15px]">جدول امتحانات {{ studentSchedule.semester }}</h4>
+      <div class="mt-[19px] w-full border-t-[7px] border-[#042A4F] rounded-t-xl">
+        <table class="w-full border-t-[7px] border-[#042A4F] bg-white overflow-hidden rounded-xl shadow-md">
+          <thead class="border border-gray-300">
+            <tr class="text-[15px] font-[400] text-gray-400">
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">اليوم</th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">التاريخ</th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الاولي</span>
+                <span>من ٩.٠٠ الي ١١.٠٠</span>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الثانيه</span>
+                <span>من ١١.٠٠ الي ١.٠٠</span>
+              </th>
+              <th class="border border-gray-300 py-[15px] px-[5px] pb-px">
+                <span class="block">الفتره الثالثه</span>
+                <span>من ١.٠٠ الي ٣.٠٠</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-center text-[15px] font-[600]">
+            <tr *ngFor="let exam of studentSchedule.examSchedule" class="hover:bg-gray-100">
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ exam.day }}</td>
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ exam.date }}</td>
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ exam.period1 }}</td>
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ exam.period2 }}</td>
+              <td class="border border-gray-300 py-[15px] px-[5px]">{{ exam.period3 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Data State -->
+  <div *ngIf="!studentSchedule && !loading && !error" class="w-full bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded">
+    لا توجد بيانات جدول متاحة
+  </div>
+</div>

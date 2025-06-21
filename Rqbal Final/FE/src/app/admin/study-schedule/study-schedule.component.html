@@ -1,0 +1,174 @@
+<div class="fixed w-full bg-[rgba(4,76,140,1)] h-[55px] mt-5 rounded-2xl flex items-center ">
+  <h1 class="text-white text-2xl font-bold ms-[30px] mb-[12px]">جامعة دمنهور</h1>
+</div>
+<div class="fixed left-65 top-0 h-full w-[50px] bg-[rgba(4,76,140,1)] z-50 rounded-2xl mt-5">
+  <!-- Empty column with background color -->
+</div>
+<div class="w-64 h-[calc(100vh-100px)] bg-[#D9D9D9] fixed top-20 left-0 shadow-md p-2 overflow-y-auto">
+
+
+  <!-- Applications Dropdown -->
+  <div class="space-y-4">
+    <!-- Periods and Courses Dropdown -->
+    <div class="mb-4">
+      <details class="group" open>
+        <summary class="flex justify-between items-center cursor-pointer list-none bg-[#939393] px-3 py-2 rounded-t">
+          <h4 class="text-lg font-semibold text-black text-center w-full">جدول المقرر</h4>
+          <span class="transition group-open:rotate-180">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#042A4F" viewBox="0 0 16 16">
+              <path
+                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg>
+          </span>
+        </summary>
+       <ul class="bg-[#D9D9D9] rounded-b">
+  <!-- Dynamically generated course levels -->
+  <li *ngFor="let level of getLevels()" class="border-b border-gray-400">
+    <details class="group">
+      <summary class="flex justify-between items-center cursor-pointer list-none px-4 py-2">
+        <span class="text-base text-center w-full">{{level}}</span>
+        <span class="transition group-open:rotate-90">›</span>
+      </summary>
+      <ul class="bg-[#e0e0e0] pl-6">
+        <li *ngFor="let course of getCoursesByLevel(level)" 
+            class="border-b border-gray-300 hover:bg-[#939393]/20 transition last:border-b-0">
+          <a (click)="selectCourse(course.name, course.id)"
+            class="block py-2 px-4 text-sm text-right w-full hover:text-[#042A4F] cursor-pointer">
+            {{course.name}}
+          </a>
+        </li>
+      </ul>
+    </details>
+  </li>
+</ul>
+      </details>
+    </div>
+  </div>
+
+  
+</div>
+
+
+
+ <!-- Schedule Table -->
+<div *ngIf="selectedCourse" class="main-content mt-8 bg-white rounded-lg shadow-md p-6">
+ <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold text-[#042A4F]">جدول المحاضرات</h2>
+    <div class="flex items-center space-x-4">
+      <div [formGroup]="scheduleForm">
+        <span class="text-[#042A4F] font-medium">نوع الدراسة:</span>
+        <select formControlName="studyType" class="border border-gray-300 rounded px-3 py-1 text-[#042A4F]">
+          <option value="all">الكل</option>
+          <option value="lecture">محاضرة</option>
+          <option value="section">سكشن</option>
+        </select>
+      </div>
+      <button (click)="addSchedule()" 
+              class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">
+        إضافة جدول
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-[#042A4F]">المادة: {{selectedCourse.name}}</h3>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200">
+      <thead class="bg-[#042A4F] text-white">
+        <tr>
+          <th class="py-2 px-4 border">اليوم</th>
+          <th class="py-2 px-4 border">الوقت</th>
+          <th class="py-2 px-4 border">القاعة</th>
+          <th class="py-2 px-4 border">المحاضر</th>
+          <th class="py-2 px-4 border">تعديل</th>
+          <th class="py-2 px-4 border">حذف</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of getFilteredSchedule()" class="hover:bg-gray-50">
+          <td class="py-2 px-4 border text-center">{{schedule.day}}</td>
+          <td class="py-2 px-4 border text-center">{{schedule.time}}</td>
+          <td class="py-2 px-4 border text-center">{{schedule.room}}</td>
+          <td class="py-2 px-4 border text-center">{{schedule.instructor}}</td>
+          <td class="py-2 px-4 border text-center">
+  <button (click)="editSchedule(schedule)" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-3 rounded-md shadow-sm transition duration-150 ease-in-out mx-1">
+    تعديل
+  </button>
+</td>
+<td class="py-2 px-4 border text-center"> 
+  <button (click)="deleteSchedule(schedule)" class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md shadow-sm transition duration-150 ease-in-out mx-1">
+    حذف
+  </button>
+</td>
+        </tr>
+        <tr *ngIf="getFilteredSchedule().length === 0">
+          <td colspan="4" class="py-4 text-center text-gray-500">لا يوجد جدول متاح لهذه المادة</td>
+        </tr>
+        <tbody>
+        
+    
+    </table>
+  </div>
+</div>
+
+<!-- Add this modal for adding/editing at the bottom of your template -->
+<div *ngIf="isAdding || isEditing" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 w-full max-w-md">
+    <h3 class="text-xl font-bold text-[#042A4F] mb-4">
+      {{isEditing ? 'تعديل الجدول' : 'إضافة جدول جديد'}}
+    </h3>
+    
+    <form [formGroup]="editForm" (ngSubmit)="submitSchedule()">
+      <div class="mb-4">
+        <label class="block text-[#042A4F] mb-2">اليوم</label>
+        <select formControlName="day" class="w-full border border-gray-300 rounded px-3 py-2">
+          <option *ngFor="let day of days" [value]="day">{{day}}</option>
+        </select>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-[#042A4F] mb-2">الوقت</label>
+        <input type="text" formControlName="time" class="w-full border border-gray-300 rounded px-3 py-2" 
+               placeholder="مثال: 08:00 - 10:00">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-[#042A4F] mb-2">القاعة</label>
+        <input type="text" formControlName="room" class="w-full border border-gray-300 rounded px-3 py-2">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-[#042A4F] mb-2">المحاضر</label>
+        <input type="text" formControlName="instructor" class="w-full border border-gray-300 rounded px-3 py-2">
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-[#042A4F] mb-2">نوع الدراسة</label>
+        <select formControlName="type" class="w-full border border-gray-300 rounded px-3 py-2">
+          <option value="lecture">محاضرة</option>
+          <option value="section">سكشن</option>
+        </select>
+      </div>
+      
+      <div class="flex justify-end space-x-3">
+        <button type="button" (click)="cancelEdit()" 
+                class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
+          إلغاء
+        </button>
+        <button type="submit" [disabled]="editForm.invalid" 
+                class="px-4 py-2 bg-[#042A4F] text-white rounded hover:bg-[#031a33] disabled:opacity-50">
+          حفظ
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="footer"  class="min-h-screen flex items-center justify-center">
+  <app-foot-admin></app-foot-admin>
+</div>
+

@@ -1,0 +1,275 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+
+% Colors for JSON and HTTP
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+\definecolor{darkgray}{rgb}{0.4,0.4,0.4}
+\definecolor{purple}{rgb}{0.65,0.12,0.82}
+
+% JSON listing style
+\lstdefinestyle{json}{
+    language=JavaScript,
+    backgroundcolor=\color{lightgray},
+    numbers=none,
+    breaklines=true,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{purple},
+    commentstyle=\color{darkgray},
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    showstringspaces=false
+}
+
+% HTTP listing style
+\lstdefinestyle{http}{
+    language=bash,
+    backgroundcolor=\color{lightgray},
+    numbers=none,
+    breaklines=true,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{purple},
+    commentstyle=\color{darkgray},
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2
+}
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{EQBAL API Documentation}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\Huge EQBAL API Documentation}
+\author{System Documentation}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Authentication}
+
+\subsection{Login}
+\begin{lstlisting}[style=http]
+POST /accounts/login/
+\end{lstlisting}
+
+\textbf{Request Body:}
+\begin{lstlisting}[style=json]
+{
+    "username": "user123",
+    "password": "your_password"
+}
+\end{lstlisting}
+
+\textbf{Response:}
+\begin{lstlisting}[style=json]
+{
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
+    "user": {
+        "id": 1,
+        "username": "user123",
+        "email": "user@example.com",
+        "user_type": "student"
+    }
+}
+\end{lstlisting}
+
+\subsection{Refresh Token}
+\begin{lstlisting}[style=http]
+POST /accounts/token/refresh/
+\end{lstlisting}
+
+\textbf{Request Body:}
+\begin{lstlisting}[style=json]
+{
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
+}
+\end{lstlisting}
+
+\section{Admin APIs}
+
+\subsection{User Management}
+
+\subsubsection{List Users}
+\begin{lstlisting}[style=http]
+GET /accounts/admin/users/
+\end{lstlisting}
+
+\textbf{Query Parameters:}
+\begin{itemize}
+    \item \texttt{user\_type}: Filter by user type (admin, professor, assistant, student)
+    \item \texttt{is\_active}: Filter by active status (true/false)
+\end{itemize}
+
+\textbf{Response:}
+\begin{lstlisting}[style=json]
+{
+    "count": 10,
+    "next": "http://api.example.com/accounts/admin/users/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "username": "professor1",
+            "email": "prof@example.com",
+            "first_name": "John",
+            "last_name": "Doe",
+            "user_type": "professor",
+            "is_active": true,
+            "profile": {
+                "department": "Computer Science",
+                "phone_number": "+1234567890"
+            }
+        }
+    ]
+}
+\end{lstlisting}
+
+\subsection{Course Management}
+
+\subsubsection{List Courses}
+\begin{lstlisting}[style=http]
+GET /accounts/admin/courses/
+\end{lstlisting}
+
+\textbf{Query Parameters:}
+\begin{itemize}
+    \item \texttt{department}: Filter by department
+    \item \texttt{level}: Filter by level (Undergraduate/Graduate)
+\end{itemize}
+
+\section{Professor APIs}
+
+\subsection{Course Management}
+
+\subsubsection{List Professor's Courses}
+\begin{lstlisting}[style=http]
+GET /accounts/professor/courses/
+\end{lstlisting}
+
+\textbf{Query Parameters:}
+\begin{itemize}
+    \item \texttt{semester}: Filter by semester
+    \item \texttt{year}: Filter by year
+    \item \texttt{is\_primary}: Filter by primary instructor status
+\end{itemize}
+
+\section{Student APIs}
+
+\subsection{Course Enrollment}
+
+\subsubsection{List Available Courses}
+\begin{lstlisting}[style=http]
+GET /accounts/student/available-courses/
+\end{lstlisting}
+
+\textbf{Query Parameters:}
+\begin{itemize}
+    \item \texttt{semester}: Current semester
+    \item \texttt{year}: Current year
+    \item \texttt{department}: Filter by department
+    \item \texttt{level}: Filter by level
+\end{itemize}
+
+\subsubsection{Enroll in Course}
+\begin{lstlisting}[style=http]
+POST /accounts/student/enrollments/
+\end{lstlisting}
+
+\textbf{Request Body:}
+\begin{lstlisting}[style=json]
+{
+    "course": 1,
+    "semester": "first",
+    "year": "2024"
+}
+\end{lstlisting}
+
+\section{Error Handling}
+
+\subsection{Common Error Responses}
+
+\subsubsection{400 Bad Request}
+\begin{lstlisting}[style=json]
+{
+    "error": "validation_error",
+    "message": "Invalid input data",
+    "details": {
+        "field_name": [
+            "Error message"
+        ]
+    }
+}
+\end{lstlisting}
+
+\subsubsection{401 Unauthorized}
+\begin{lstlisting}[style=json]
+{
+    "detail": "Authentication credentials were not provided."
+}
+\end{lstlisting}
+
+\section{API Usage Guidelines}
+
+\subsection{Authentication}
+All requests (except login and register) must include an Authorization header:
+\begin{lstlisting}[style=http]
+Authorization: Bearer <access_token>
+\end{lstlisting}
+
+\subsection{Pagination}
+\begin{itemize}
+    \item Most list endpoints are paginated
+    \item Default page size is 10 items
+    \item Use \texttt{page} query parameter to navigate through pages
+    \item Response includes \texttt{next} and \texttt{previous} URLs
+\end{itemize}
+
+\subsection{Best Practices}
+\begin{enumerate}
+    \item Always validate input data before sending
+    \item Handle error responses appropriately
+    \item Implement proper token refresh mechanism
+    \item Use appropriate HTTP methods for operations:
+    \begin{itemize}
+        \item GET for retrieving data
+        \item POST for creating new resources
+        \item PUT/PATCH for updates
+        \item DELETE for removing resources
+    \end{itemize}
+\end{enumerate}
+
+\section{Rate Limiting}
+
+The API implements rate limiting to ensure fair usage:
+\begin{itemize}
+    \item 100 requests per minute for authenticated users
+    \item 20 requests per minute for unauthenticated users
+\end{itemize}
+
+When rate limit is exceeded, the API returns:
+\begin{lstlisting}[style=json]
+{
+    "detail": "Request was throttled. Expected available in 30 seconds."
+}
+\end{lstlisting}
+
+\end{document} 

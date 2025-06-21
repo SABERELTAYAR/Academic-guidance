@@ -1,0 +1,7 @@
+.main-content {
+            margin-right: 0;
+            margin-left: 240px;
+            margin-top: 120px;
+            width: calc(100% - 280px);
+            padding: 20px;
+        }

@@ -1,0 +1,966 @@
+<app-student-data-nav></app-student-data-nav>
+
+<!-- Main Content Area -->
+<div class="main-content">
+    <!-- Personal Information Section -->
+<!-- Personal Information Section -->
+<div id="personal-info" dir="rtl" class="content-section active">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6  w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">البيانات الشخصية</h2>
+        </div>
+        <form #personalInfoForm="ngForm">
+            <!-- First Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الاسم العربي</label>
+                    <input type="text" [(ngModel)]="selectStudent.arabicName" name="arabicName" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الاسم الانجليزي</label>
+                    <input type="text" [(ngModel)]="selectStudent.englishName" name="englishName" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">اسم المستخدم</label>
+                    <input type="text" [(ngModel)]="selectStudent.username" name="username" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">كود الطالب</label>
+                    <input type="text" [(ngModel)]="selectStudent.studentCode" name="studentCode" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">بلد الجنسية</label>
+                    <input type="text" [(ngModel)]="selectStudent.nationalityCountry" name="nationalityCountry" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">النوع</label>
+                    <select [(ngModel)]="selectStudent.gender" name="gender" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="ذكر">ذكر</option>
+                        <option value="أنثى">أنثى</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Fourth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الديانة</label>
+                    <select [(ngModel)]="selectStudent.religion" name="religion" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="مسلم">مسلم</option>
+                        <option value="مسيحي">مسيحي</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تاريخ الميلاد</label>
+                    <input type="date" [(ngModel)]="selectStudent.birthDate" name="birthDate" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <!-- Fifth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">محل الميلاد</label>
+                    <input type="text" [(ngModel)]="selectStudent.birthPlace" name="birthPlace" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">نوع البطاقة</label>
+                    <select [(ngModel)]="selectStudent.idType" name="idType" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="بطاقة شخصية">بطاقة شخصية</option>
+                        <option value="جواز سفر">جواز سفر</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sixth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الحالة الاجتماعية</label>
+                    <select [(ngModel)]="selectStudent.maritalStatus" name="maritalStatus" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="أعزب">أعزب</option>
+                        <option value="متزوج">متزوج</option>
+                        <option value="مطلق">مطلق</option>
+                        <option value="أرمل">أرمل</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم RFID</label>
+                    <input type="text" [(ngModel)]="selectStudent.rfidNumber" name="rfidNumber" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <!-- Seventh Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المورد المالي</label>
+                    <select [(ngModel)]="selectStudent.financialSource" name="financialSource" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="ذاتي">ذاتي</option>
+                        <option value="منحة">منحة</option>
+                        <option value="قرض">قرض</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تعطيل حساب الطالب</label>
+                    <select [(ngModel)]="selectStudent.accountDisabled" name="accountDisabled" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="نشط">نشط</option>
+                        <option value="معطل">معطل</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Eighth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الملاحظات</label>
+                    <textarea [(ngModel)]="selectStudent.notes" name="notes" [readonly]="!isEditing"
+                        class="w-full h-20 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing"></textarea>
+                </div>
+            </div>
+
+            <!-- Ninth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تاريخ الإصدار</label>
+                    <input type="date" [(ngModel)]="selectStudent.issueDate" name="issueDate" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">محل الإصدار</label>
+                    <input type="text" [(ngModel)]="selectStudent.issuePlace" name="issuePlace" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <!-- Tenth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">جنسية أخرى</label>
+                    <input type="text" [(ngModel)]="selectStudent.secondNationality" name="secondNationality" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">جنسية حساب الرسوم</label>
+                    <select [(ngModel)]="selectStudent.feesNationality" name="feesNationality" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="محلي">محلي</option>
+                        <option value="أجنبي">أجنبي</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Eleventh Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">نوع الاحتياجات الخاصة</label>
+                    <select [(ngModel)]="selectStudent.specialNeedsType" name="specialNeedsType" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="لا يوجد">لا يوجد</option>
+                        <option value="حركية">حركية</option>
+                        <option value="بصرية">بصرية</option>
+                        <option value="سمعية">سمعية</option>
+                        <option value="ذهنية">ذهنية</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdit()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Contact Information Section -->
+<!-- <div id="contact-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">بيانات الاتصال</h2>
+        </div>
+        <form #contactInfoForm="ngForm">
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">البريد الإلكتروني</label>
+                    <input type="email" [(ngModel)]="selectStudent.email" name="email" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم الهاتف</label>
+                    <input type="tel" [(ngModel)]="selectStudent.phone" name="phone" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم هاتف آخر</label>
+                    <input type="tel" [(ngModel)]="selectStudent.alternatePhone" name="alternatePhone" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم هاتف ولي الأمر</label>
+                    <input type="tel" [(ngModel)]="selectStudent.parentPhone" name="parentPhone" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing" />
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">عنوان السكن</label>
+                <textarea [(ngModel)]="selectStudent.address" name="address" rows="3" [readonly]="!isEditing"
+                    class="w-full rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                    [class.bg-white]="isEditing"></textarea>
+            </div>
+
+           <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdits()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- Family Information Section -->
+<div id="family-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">بيانات العائلة</h2>
+        </div>
+
+        <form #familyInfoForm="ngForm">
+            <!-- First Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">اسم الأب</label>
+                    <input type="text" [(ngModel)]="selectStudent.fatherName" name="fatherName" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">وظيفة الأب</label>
+                    <input type="text" [(ngModel)]="selectStudent.fatherJob" name="fatherJob" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">درجة القرابة</label>
+                    <select [(ngModel)]="selectStudent.relationDegree" name="relationDegree" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="أب">أب</option>
+                        <option value="أم">أم</option>
+                        <option value="ولي أمر">ولي أمر</option>
+                        <option value="قريب">قريب</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المدينة</label>
+                    <input type="text" [(ngModel)]="selectStudent.familyCity" name="familyCity" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">العنوان</label>
+                    <input type="text" [(ngModel)]="selectStudent.familyAddress" name="familyAddress" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">بلد الجنسية</label>
+                    <input type="text" [(ngModel)]="selectStudent.familyNationality" name="familyNationality" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Fourth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">اسم الأم</label>
+                    <input type="text" [(ngModel)]="selectStudent.motherName" name="motherName" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تيليفون المنزل</label>
+                    <input type="text" [(ngModel)]="selectStudent.homePhone" name="homePhone" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Fifth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">وظيفة الأم</label>
+                    <input type="text" [(ngModel)]="selectStudent.motherJob" name="motherJob" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">سبب تخفيض الرسوم</label>
+                    <select [(ngModel)]="selectStudent.feeReductionReason" name="feeReductionReason" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="لا يوجد">لا يوجد</option>
+                        <option value="أخوة بالجامعة">أخوة بالجامعة</option>
+                        <option value="منحة دراسية">منحة دراسية</option>
+                        <option value="حالات خاصة">حالات خاصة</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sixth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم الموبايل</label>
+                    <input type="text" [(ngModel)]="selectStudent.parentPhone" name="parentPhone" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الفاكس</label>
+                    <input type="text" [(ngModel)]="selectStudent.faxNumber" name="faxNumber" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Seventh Row -->
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">عدد الأخوة</label>
+                <input type="number" [(ngModel)]="selectStudent.siblingsCount" name="siblingsCount" [readonly]="!isEditing"
+                    class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                    [class.bg-white]="isEditing">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdit()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="education-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">بيانات المؤهل الدراسي السابق</h2>
+        </div>
+
+        <form #educationInfoForm="ngForm">
+            <!-- First Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المدرسة/المعهد (عربي)</label>
+                    <input type="text" [(ngModel)]="selectStudent.schoolNameArabic" name="schoolNameArabic" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المدرسة/المعهد (انجليزي)</label>
+                    <input type="text" [(ngModel)]="selectStudent.schoolNameEnglish" name="schoolNameEnglish" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">نوع المؤهل</label>
+                    <select [(ngModel)]="selectStudent.qualificationType" name="qualificationType" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="ثانوية عامة">ثانوية عامة</option>
+                        <option value="دبلوم">دبلوم</option>
+                        <option value="شهادة أزهرية">شهادة أزهرية</option>
+                        <option value="شهادة دولية">شهادة دولية</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">سنة التخرج</label>
+                    <input type="text" [(ngModel)]="selectStudent.graduationYear" name="graduationYear" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">دور المؤهل</label>
+                    <select [(ngModel)]="selectStudent.qualificationRound" name="qualificationRound" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="أول">أول</option>
+                        <option value="ثاني">ثاني</option>
+                        <option value="ثالث">ثالث</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">مجموع الدرجات</label>
+                    <input type="text" [(ngModel)]="selectStudent.qualificationScore" name="qualificationScore" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Fourth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">SAT I</label>
+                    <input type="text" [(ngModel)]="selectStudent.sat1Score" name="sat1Score" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم الجلوس</label>
+                    <input type="text" [(ngModel)]="selectStudent.seatNumber" name="seatNumber" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Fifth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم موافقة التحويل</label>
+                    <input type="text" [(ngModel)]="selectStudent.transferApprovalNumber" name="transferApprovalNumber" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">نوع القبول</label>
+                    <select [(ngModel)]="selectStudent.admissionType" name="admissionType" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="انتظام">انتظام</option>
+                        <option value="انتساب">انتساب</option>
+                        <option value="تحويل">تحويل</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sixth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">رقم الإصدار</label>
+                    <input type="text" [(ngModel)]="selectStudent.certificateNumber" name="certificateNumber" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">كشف مسلسل الكومبيوتر</label>
+                    <input type="text" [(ngModel)]="selectStudent.computerSerialReport" name="computerSerialReport" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Seventh Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">اللغة الثانية</label>
+                    <select [(ngModel)]="selectStudent.secondLanguage" name="secondLanguage" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing">
+                        <option value="فرنسي">فرنسي</option>
+                        <option value="ألماني">ألماني</option>
+                        <option value="إيطالي">إيطالي</option>
+                        <option value="إسباني">إسباني</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المعدل التراكمي</label>
+                    <input type="text" [(ngModel)]="selectStudent.gpa" name="gpa" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Eighth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">النسبة</label>
+                    <input type="text" [(ngModel)]="selectStudent.percentage" name="percentage" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تاريخ المؤهل</label>
+                    <input type="date" [(ngModel)]="selectStudent.qualificationDate" name="qualificationDate" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Ninth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">SAT II</label>
+                    <input type="text" [(ngModel)]="selectStudent.sat2Score" name="sat2Score" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تاريخ موافقة التحويل</label>
+                    <input type="date" [(ngModel)]="selectStudent.transferApprovalDate" name="transferApprovalDate" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Tenth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الجهة المحول منها</label>
+                    <input type="text" [(ngModel)]="selectStudent.transferredFrom" name="transferredFrom" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">سنة الالتحاق</label>
+                    <input type="text" [(ngModel)]="selectStudent.admissionYear" name="admissionYear" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- School Address -->
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">عنوان المدرسة</label>
+                <textarea [(ngModel)]="selectStudent.schoolAddress" name="schoolAddress" rows="2" [readonly]="!isEditing"
+                    class="w-full rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                    [class.bg-white]="isEditing"></textarea>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdit()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<!-- Academic Information Section -->
+<div id="academic-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">البيانات الدراسية</h2>
+        </div>
+
+        <form #academicInfoForm="ngForm">
+            <!-- First Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الكلية</label>
+                    <input type="text" [(ngModel)]="selectStudent.faculty" name="faculty" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">عام الالتحاق</label>
+                    <input type="text" [(ngModel)]="selectStudent.enrollmentYear" name="enrollmentYear" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">البرنامج</label>
+                    <input type="text" [(ngModel)]="selectStudent.program" name="program" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المستوى</label>
+                    <select [(ngModel)]="selectStudent.level" name="level" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="الأول">الأول</option>
+                        <option value="الثاني">الثاني</option>
+                        <option value="الثالث">الثالث</option>
+                        <option value="الرابع">الرابع</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">المعدل التراكمي</label>
+                    <input type="text" [(ngModel)]="selectStudent.gpa" name="gpa" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">عدد الساعات</label>
+                    <input type="text" [(ngModel)]="selectStudent.creditHours" name="creditHours" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">معدل العام السابق</label>
+                    <input type="text" [(ngModel)]="selectStudent.previousYearGPA" name="previousYearGPA" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">تقدير العام السابق</label>
+                    <input type="text" [(ngModel)]="selectStudent.previousYearGrade" name="previousYearGrade" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">آخر طباعة للبطاقة</label>
+                    <input type="text" [(ngModel)]="selectStudent.lastCardPrint" name="lastCardPrint" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Fourth Row -->
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">مشروع التخرج (العربي)</label>
+                    <input type="text" [(ngModel)]="selectStudent.graduationProjectAr" name="graduationProjectAr" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">مشروع التخرج (الإنجليزية)</label>
+                    <input type="text" [(ngModel)]="selectStudent.graduationProjectEn" name="graduationProjectEn" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <!-- Courses Table -->
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">المقررات المسجلة</label>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-2 px-4 border-b text-right">كود المقرر</th>
+                                <th class="py-2 px-4 border-b text-right">اسم المقرر</th>
+                                <th class="py-2 px-4 border-b text-right">عدد الساعات</th>
+                                <th class="py-2 px-4 border-b text-right">المدرس</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let course of selectStudent.courses" class="hover:bg-gray-50">
+                                <td class="py-2 px-4 border-b text-right">{{course.code}}</td>
+                                <td class="py-2 px-4 border-b text-right">{{course.name}}</td>
+                                <td class="py-2 px-4 border-b text-right">{{course.hours}}</td>
+                                <td class="py-2 px-4 border-b text-right">{{course.instructor}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdit()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Medical Information Section -->
+<!-- <div id="medical-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">الكشف الطبي</h2>
+        </div>
+
+        <form #medicalInfoForm="ngForm">
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الطول</label>
+                    <input type="text" [(ngModel)]="selectStudent.height" name="height" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">الوزن</label>
+                    <input type="text" [(ngModel)]="selectStudent.weight" name="weight" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">فصيلة الدم</label>
+                    <select [(ngModel)]="selectStudent.bloodType" name="bloodType" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">حالة الإعاقة</label>
+                    <select [(ngModel)]="selectStudent.disabilityStatus" name="disabilityStatus" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="لا يوجد">لا يوجد</option>
+                        <option value="بصرية">بصرية</option>
+                        <option value="سمعية">سمعية</option>
+                        <option value="حركية">حركية</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">الأمراض المزمنة</label>
+                <textarea [(ngModel)]="selectStudent.chronicDiseases" name="chronicDiseases" rows="2" [readonly]="!isEditing"
+                    class="w-full rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                    [class.bg-white]="isEditing"></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="block text-gray-700 mb-1 text-right">تاريخ آخر كشف طبي</label>
+                <input type="date" [(ngModel)]="selectStudent.lastMedicalCheckup" name="lastMedicalCheckup" [readonly]="!isEditing"
+                    class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                    [class.bg-white]="isEditing">
+            </div>
+
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdits()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- Literacy Information Section -->
+<!-- <div id="literacy-info" class="content-section">
+    <div class="content-card bg-white rounded-lg shadow-lg p-6 w-full">
+        <div class="card-header mb-6">
+            <h2 class="text-2xl font-bold text-[#0A2540] text-right">محو الأمية</h2>
+        </div>
+
+        <form #literacyInfoForm="ngForm">
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">حالة محو الأمية</label>
+                    <select [(ngModel)]="selectStudent.literacyStatus" name="literacyStatus" [disabled]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
+                        [class.bg-gray-100]="!isEditing" [class.bg-white]="isEditing"
+                        [class.cursor-not-allowed]="!isEditing">
+                        <option value="معفى">معفى</option>
+                        <option value="ملتزم">ملتزم</option>
+                        <option value="منجز">منجز</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">سبب الإعفاء</label>
+                    <input type="text" [(ngModel)]="selectStudent.literacyExemptionReason" name="literacyExemptionReason" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <div class="form-row flex flex-col md:flex-row gap-4 mb-4">
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">اسم المركز</label>
+                    <input type="text" [(ngModel)]="selectStudent.literacyCenter" name="literacyCenter" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+                <div class="form-group flex-1">
+                    <label class="block text-gray-700 mb-1 text-right">سنة الحصول على الشهادة</label>
+                    <input type="text" [(ngModel)]="selectStudent.literacyCertificationYear" name="literacyCertificationYear" [readonly]="!isEditing"
+                        class="w-full h-12 rounded-lg px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right bg-gray-100"
+                        [class.bg-white]="isEditing">
+                </div>
+            </div>
+
+            <div class="action-buttons flex justify-end gap-4 mt-6">
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="cancelEdits()" [disabled]="!isEditing">
+                    إلغاء التعديلات
+                </button>
+                <button type="button"
+                    class="btn bg-gray-500 text-white h-12 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
+                    (click)="printForm()">
+                    طباعة
+                </button>
+                <button type="button"
+                    class="btn bg-[#044C8C] text-white h-12 px-6 rounded-lg hover:bg-[#042A4F] transition-colors duration-300"
+                    (click)="toggleEdit()">
+                    {{ isEditing ? 'حفظ' : 'تعديل البيانات' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+</div>
+<div class="fixed left-65 top-0 h-full w-[50px] bg-[rgba(4,76,140,1)] z-50 rounded-2xl mt-5">
+
+</div>
+<!-- Left Sidebar -->
+
+<app-student-left-sidebar (studentSelected)="onStudentSelected($event)" (studentUpdated)="refreshStudentList()"> </app-student-left-sidebar>

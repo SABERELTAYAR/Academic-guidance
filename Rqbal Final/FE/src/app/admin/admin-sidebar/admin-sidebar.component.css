@@ -1,0 +1,9 @@
+span{
+    font-size: 20px;
+}
+.bg{
+    background-color: rgba(4, 42, 79, 0.92);
+}
+.bghover:hover{
+    background-color: #072d51;
+}

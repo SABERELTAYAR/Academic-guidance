@@ -1,0 +1,129 @@
+<div class="fixed w-full bg-[rgba(4,76,140,1)] h-[55px] mt-5 rounded-2xl flex items-center ">
+  <h1 class="text-white text-2xl font-bold ms-[30px] mb-[12px]">جامعة دمنهور</h1>
+</div>
+<div class="fixed left-65 top-0 h-full w-[50px] bg-[rgba(4,76,140,1)] z-50 rounded-2xl mt-5">
+  <!-- Empty column with background color -->
+</div>
+<div class="w-64 h-[calc(100vh-100px)] bg-[#D9D9D9] fixed top-20 left-0 shadow-md p-2 overflow-y-auto">
+  
+  <!-- Applications Dropdown -->
+<div class="space-y-4">
+  <!-- Periods and Courses Dropdown -->
+  <div class="mb-4">
+    <details class="group" open>
+      <summary class="flex justify-between items-center cursor-pointer list-none bg-[#939393] px-3 py-2 rounded-t">
+        <h4 class="text-lg font-semibold text-black text-center w-full">الفترات والمقررات</h4>
+        <span class="transition group-open:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#042A4F" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="bg-[#D9D9D9] rounded-b">
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/periods-definition']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تعريف الفترات
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/courses-definition']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تعريف المقررات
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a (click)="navigateTo('/admin/study-schedules')" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            جدول المقرر
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/similar-courses']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            مقررات متشابهة
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/edit-course-schedule']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تعديل جدول المقرر
+          </a>
+        </li>
+        <li class="hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/weekly-schedule-definition']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تعريف الجدول الأسبوعي
+          </a>
+        </li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- Reports Dropdown -->
+  <div class="mb-4">
+    <details class="group" open>
+      <summary class="flex justify-between items-center cursor-pointer list-none bg-[#939393] px-3 py-2 rounded-t">
+        <h4 class="text-lg font-semibold text-[#042A4F] text-center w-full">التقارير</h4>
+        <span class="transition group-open:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#042A4F" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          </svg>
+        </span>
+      </summary>
+      <ul class="bg-[#D9D9D9] rounded-b">
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/course-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول مقرر
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/program-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول برنامج
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/location-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير مكان
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/group-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول مجموعة
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/registration-acceptance-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير قبول التسجيل
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/lecturer-general-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول محاضر عام
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/faculty-members-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير أعضاء هيئة التدريس
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/student-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول الطالب
+          </a>
+        </li>
+        <li class="border-b border-gray-400 hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/lecturer-schedule-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير جدول المحاضر
+          </a>
+        </li>
+        <li class="hover:bg-[#939393]/30 transition">
+          <a [routerLink]="['/faculty-representatives-report']" class="block py-2 px-4 text-base text-center w-full hover:text-[#042A4F]">
+            تقرير أعيان هيئة التدريس
+          </a>
+        </li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+</div>
+
+
+<div class="min-h-screen flex items-center justify-center">
+    <app-foot-admin></app-foot-admin>
+</div>

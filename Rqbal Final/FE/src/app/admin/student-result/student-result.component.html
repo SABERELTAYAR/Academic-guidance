@@ -1,0 +1,108 @@
+<div class="fixed w-full bg-[rgba(4,76,140,1)] h-[55px] mt-5 rounded-2xl flex items-center ">
+  <h1 class="text-white text-2xl font-bold ms-[30px] mb-[12px]">جامعة دمنهور</h1>
+</div>
+<div class="fixed left-65 top-0 h-full w-[50px] bg-[rgba(4,76,140,1)] z-50 rounded-2xl mt-5">
+  <!-- Empty column with background color -->
+</div>
+<div class="w-65 h-[calc(100vh-100px)] bg-[#D9D9D9] fixed top-20 left-0 shadow-md  pt-0 overflow-y-auto rounded-2xl">
+  <!-- Filter Form -->
+  <div class="text-center p-2 mb-4 bg-[rgba(147,147,147,1)] rounded-2xl">
+    <h3 class="text-base  text-black font-bold text-[20px]" > البيانات الأساسية </h3>
+  </div>
+  <form  [formGroup] ="filterForm" class="mb-4 text-lg text-center mx-1">
+    <div class="mb-3">
+      <label class="block mb-3  font-medium text-gray-600">عام الالتحاق</label>
+      <select formControlName="admissionYear" class="w-full p-2 bg-white ">
+        <option value="">اختر السنة</option>
+        <option *ngFor="let year of admissionYears" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="block mb-3 font-medium text-gray-600">مدة القيد</label>
+      <select formControlName="enrollmentDuration" class="w-full p-2 bg-white  ">
+        <option value="">اختر المدة</option>
+        <option *ngFor="let duration of enrollmentDurations" [value]="duration">{{ duration }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="block mb-3  font-medium text-gray-600">الاسم / الرقم</label>
+      <input type="text" formControlName="nameOrNumber" class="w-full p-2 bg-white ">
+    </div>
+  </form>
+
+  <!-- Search Results Header -->
+  <div class="mb-3 bg-[#575757] rounded-2xl ">
+    <h4 class="text-lg text-center font-semibold text-[#f0f0f0]">نتيجة البحث</h4>
+  </div> 
+
+  <!-- Student List -->
+  <div class="max-h-[50vh] overflow-y-auto">
+    <ul class="space-y-2">
+      <li *ngFor="let student of filteredStudents"
+          class="flex justify-between items-center p-2 hover:bg-gray-100 cursor-pointer rounded"
+          (click)="selectStudent(student)">
+        <span class="text-sm">{{ student.ID }}</span>
+        <span class="text-sm">{{ student.name }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="ml-[300px] p-4 main-content " *ngIf="selectedStudent">
+    <h2 class="text-xl font-bold mb-4">تفاصيل الطالب: {{selectedStudent.name}}</h2>
+    <div class="mb-4">
+      <p><strong>رقم الجامعة:</strong> {{selectedStudent.ID}}</p>
+      <p><strong>سنة الالتحاق:</strong> {{selectedStudent.admissionYear}}</p>
+      <p><strong>مدة القيد:</strong> {{selectedStudent.enrollmentDuration}}</p>
+      <p><strong>المعدل التراكمي:</strong> {{calculateGPA().toFixed(2)}}</p>
+    </div>
+  
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-300">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="py-2 px-4 border">كود المقرر</th>
+          <th class="py-2 px-4 border">ساعات المقرر</th>
+          <th class="py-2 px-4 border">اسم المقرر</th>
+          <th class="py-2 px-4 border" colspan="4">الدرجات</th>
+          <th class="py-2 px-4 border">المجموع</th>
+          <th class="py-2 px-4 border">التقدير</th>
+          <th class="py-2 px-4 border">عدد النقاط</th>
+          <th class="py-2 px-4 border">مجموع الكنترول</th>
+        </tr>
+        <tr>
+          <th colspan="3"></th>
+          <th class="py-2 px-4 border">منتصف الفصل</th>
+          <th class="py-2 px-4 border">شفوي</th>
+          <th class="py-2 px-4 border">أعمال فصل</th>
+          <th class="py-2 px-4 border">نهاية الفصل</th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of studentCourses" class="hover:bg-gray-50">
+          <td class="py-2 px-4 border text-center">{{course.code}}</td>
+          <td class="py-2 px-4 border text-center">{{course.hours}}</td>
+          <td class="py-2 px-4 border">{{course.name}}</td>
+          <td class="py-2 px-4 border text-center">
+            {{course.grades.midterm}} / {{course.maxGrades.midterm}}
+          </td>
+          <td class="py-2 px-4 border text-center">
+            {{course.grades.oral}} / {{course.maxGrades.oral}}
+          </td>
+          <td class="py-2 px-4 border text-center">
+            {{course.grades.classwork}} / {{course.maxGrades.classwork}}
+          </td>
+          <td class="py-2 px-4 border text-center">
+            {{course.grades.final}} / {{course.maxGrades.final}}
+          </td>
+          <td class="py-2 px-4 border text-center">{{course.total}}</td>
+          <td class="py-2 px-4 border text-center">{{course.grade}}</td>
+          <td class="py-2 px-4 border text-center">{{course.points}}</td>
+          <td class="py-2 px-4 border text-center">{{course.controlTotal}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+/* Main container */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.profile-header {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #042A4F;
+  margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.profile-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #F6F6F6;
+}
+
+.basic-info-card {
+  display: flex;
+  align-items: center;
+  min-height: 120px;
+}
+
+.detailed-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Info items */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #F6F6F6;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #4B5563;
+}
+
+.info-value {
+  font-weight: 400;
+  color: #042A4F;
+}
+
+/* Basic info content */
+.basic-info-content {
+  width: 100%;
+}
+
+.name-role {
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #042A4F;
+  display: block;
+}
+
+.role {
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.contact-info {
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+/* States */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25rem solid rgba(4, 42, 79, 0.1);
+  border-top-color: #042A4F;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.error-state {
+  background-color: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #B91C1C;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.no-data-state {
+  background-color: #DBEAFE;
+  border: 1px solid #93C5FD;
+  color: #1E40AF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

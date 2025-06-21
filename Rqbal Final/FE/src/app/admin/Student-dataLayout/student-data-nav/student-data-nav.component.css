@@ -1,0 +1,42 @@
+        /* Top Navigation Bar Styles */
+        .top-nav {
+            background-color: #044c8c;
+            color: white;
+            height: 50px;
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            z-index: 999;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu li:hover , .nav-menu li.active {
+            background-color: rgba(22, 101, 172, 1);
+            border-radius: 15px;
+            padding: 0px 15px;
+
+            /* border-bottom: 3px solid white; */
+        }
+        
+        .nav-menu li svg {
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
+        }
+        

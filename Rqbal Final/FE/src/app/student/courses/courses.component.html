@@ -1,0 +1,88 @@
+<div class="flex flex-col gap-[52px]">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="w-full flex justify-center py-12">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#042A4F]"></div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+    {{ error }}
+  </div>
+
+  <!-- No Data State -->
+  <div *ngIf="!loading && !error && (!studentCourses || studentCourses.length === 0)" class="w-full bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+    لا توجد بيانات متاحة لهذا الطالب
+  </div>
+
+  <!-- Current Courses Section -->
+  <div *ngIf="activeCourses.length" class="flex flex-col">
+    <h4 class="font-[600] text-[24px]">المقررات الحالية</h4>
+    <div class="h-2 w-full mx-auto mt-[14.3px] bg-[#042A4F] rounded-t-full"></div>
+    <div class="mt-[19px] w-full">
+      <table class="w-full mt-2 z-10 bg-white overflow-hidden rounded-xl border border-gray-300 shadow-md">
+        <thead class="border border-gray-300">
+          <tr class="text-[15px] font-[400] text-gray-400">
+            <th class="border border-gray-300 py-[25px] px-[10px]">#</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">كود المقرر</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">اسم المقرر</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">القسم</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">عدد الساعات</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الفصل</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">السنة</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الدرجة</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الحالة</th>
+          </tr>
+        </thead>
+        <tbody class="text-center text-[15px] font-[400]">
+          <tr *ngFor="let course of activeCourses; let i = index" class="hover:bg-gray-100">
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ i + 1 }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.course_code }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.course_title }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.department }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.credit_hours }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.semester }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.year }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.grade }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.status_display }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Completed Courses Section -->
+  <div *ngIf="completedCourses.length" class="flex flex-col mt-8">
+    <h4 class="font-[600] text-[24px]">المقررات التي تم اجتيازها</h4>
+    <div class="h-2 w-full mx-auto mt-[14.3px] bg-[#042A4F] rounded-t-full"></div>
+    <div class="mt-[19px] w-full">
+      <table class="w-full mt-2 z-10 bg-white overflow-hidden rounded-xl border border-gray-300 shadow-md">
+        <thead class="border border-gray-300">
+          <tr class="text-[15px] font-[400] text-gray-400">
+            <th class="border border-gray-300 py-[25px] px-[10px]">#</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">كود المقرر</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">اسم المقرر</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">القسم</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">عدد الساعات</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الفصل</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">السنة</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الدرجة</th>
+            <th class="border border-gray-300 py-[25px] px-[10px]">الحالة</th>
+          </tr>
+        </thead>
+        <tbody class="text-center text-[15px] font-[400]">
+          <tr *ngFor="let course of completedCourses; let i = index" class="hover:bg-gray-100">
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ i + 1 }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.course_code }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.course_title }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.department }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.credit_hours }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.semester }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.year }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.grade }}</td>
+            <td class="border border-gray-300 py-[25px] px-[10px]">{{ course.status_display }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

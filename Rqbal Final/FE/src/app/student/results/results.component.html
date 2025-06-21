@@ -1,0 +1,60 @@
+<div class="flex flex-col px-[45px]">
+  <!-- Header Section -->
+  <div class="flex justify-between w-full items-end">
+    <h3 class="font-[500] text-[30px]">السنة {{ studentResults?.academicYear || 'غير محدد' }} </h3>
+   
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="mt-8 w-full flex justify-center">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#044C8C]"></div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="mt-8 w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+    {{ error }}
+  </div>
+
+  <!-- No Results State -->
+  <div *ngIf="!loading && !error && !studentResults" class="mt-8 w-full bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+    لا توجد نتائج متاحة لهذا الطالب
+  </div>
+
+  <!-- Semester Results -->
+  <div *ngFor="let semester of studentResults?.semesters" 
+       class="mt-[37px] w-full flex flex-col justify-center pb-5 items-center bg-white rounded-xl border-s-[7px] border-[#042A4F] shadow-md hover:shadow-lg transition-shadow">
+    <div class="flex flex-row w-full justify-between p-[16px] text-[15px] font-[600]">
+      <span> {{ semester.name }} </span>
+      <span> الساعات المكتسبه: {{ semester.earnedHours }} </span>
+      <span> المعدل الفصلي: {{ semester.gpa | number:'1.2-2' }} </span>
+    </div>
+    
+    <table class="w-full mt-2 bg-white overflow-hidden rounded-xl border border-gray-300">
+      <thead class="border border-gray-300 bg-gray-50">
+        <tr class="text-[15px] font-[400] text-gray-600">
+          <th class="border border-gray-300 py-[10px] px-[10px]">#</th>
+          <th class="border border-gray-300 py-[10px] px-[10px]">المقرر</th>
+          <th class="border border-gray-300 py-[10px] px-[10px]">الدرجة</th>
+          <th class="border border-gray-300 py-[10px] px-[10px]">الساعات</th>
+        </tr>
+      </thead>
+
+      <tbody class="text-center text-[15px] font-[400]">
+        <tr *ngFor="let course of semester.courses; let i = index" class="hover:bg-gray-50">
+          <td class="border border-gray-300 py-[10px] px-[10px]">{{ i + 1 }}</td>
+          <td class="border border-gray-300 py-[10px] px-[10px]">{{ course.name }}</td>
+          <td class="border border-gray-300 py-[10px] px-[10px] font-semibold" [ngClass]="getGradeColor(course.grade)">
+            {{ course.grade }}
+          </td>
+          <td class="border border-gray-300 py-[10px] px-[10px]">{{ course.hours }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary Section -->
+  <div *ngIf="studentResults" class="flex flex-row text-[15px] font-[600] py-8 justify-evenly bg-gray-50 rounded-lg p-4 mt-4">
+    <span>اجمالي الساعات المكتسبه: {{ studentResults.totalHours }}</span>
+    <span>المعدل التراكمي: {{ studentResults.cumulativeGPA | number:'1.2-2' }}</span>
+  </div>
+</div>

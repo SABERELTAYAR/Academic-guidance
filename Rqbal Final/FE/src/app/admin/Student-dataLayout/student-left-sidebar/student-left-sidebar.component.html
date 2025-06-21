@@ -1,0 +1,58 @@
+<!-- student-left-sidebar.component.html -->
+<div class="w-65 h-[calc(100vh-100px)] bg-[#D9D9D9] fixed top-20 left-0 shadow-md pt-0 overflow-y-auto rounded-2xl">
+  <!-- Filter Form -->
+  <div class="text-center p-2 mb-4 bg-[rgba(147,147,147,1)] rounded-2xl">
+    <h3 class="text-base text-black font-bold text-[20px]">البيانات الأساسية</h3>
+  </div>
+  
+  <form [formGroup]="filterForm" class="mb-4 text-lg text-center mx-1">
+    <div class="mb-3">
+      <label class="block mb-3 font-medium text-gray-600">عام الالتحاق</label>
+      <select formControlName="admissionYear" class="w-full p-2 bg-white border border-gray-300 rounded">
+        <option value="">اختر السنة</option>
+        <option *ngFor="let year of admissionYears" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <label class="block mb-3 font-medium text-gray-600">مدة القيد</label>
+      <select formControlName="enrollmentDuration" class="w-full p-2 bg-white border border-gray-300 rounded">
+        <option value="">اختر المدة</option>
+        <option *ngFor="let duration of enrollmentDurations" [value]="duration">{{ duration }}</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <label class="block mb-3 font-medium text-gray-600">الاسم / الرقم</label>
+      <input type="text" formControlName="nameOrNumber" 
+             class="w-full p-2 bg-white border border-gray-300 rounded" 
+             placeholder="ابحث بالاسم أو الرقم">
+    </div>
+  </form>
+
+  <!-- Search Results Header -->
+  <div class="mb-3 bg-[#575757] rounded-2xl py-2">
+    <h4 class="text-lg text-center font-semibold text-[#f0f0f0]">نتيجة البحث</h4>
+  </div> 
+
+  <!-- Student List -->
+  <div class="max-h-[50vh] overflow-y-auto px-2">
+    <ul class="space-y-2">
+      <li *ngFor="let student of filteredStudents"
+          class="flex justify-between items-center p-3 bg-white hover:bg-gray-100 cursor-pointer rounded-lg shadow-sm"
+          (click)="selectStudent(student)">
+        <span class="text-sm font-medium text-gray-700">{{ student.ID }}</span>
+        <span class="text-sm font-medium text-right text-gray-700">{{ student.arabicName }}</span>
+      </li>
+      
+      <li *ngIf="filteredStudents.length === 0" class="text-center p-3 text-gray-500">
+        لا توجد نتائج
+      </li>
+    </ul>
+    
+    <div *ngIf="isLoading" class="text-center p-3">
+      <span class="loading loading-spinner loading-md"></span>
+      <p>جاري التحميل...</p>
+    </div>
+  </div>
+</div>

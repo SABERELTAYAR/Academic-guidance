@@ -1,0 +1,61 @@
+<div class="flex flex-col px-[45px] py-8">
+  <h3 class="font-medium text-3xl text-[#042A4F] mb-2">جدول الإنذارات</h3>
+  <div class="flex items-center mb-8">
+    <span class="text-lg text-gray-600 mr-2">الطالب:</span>
+    <span class="text-lg font-semibold">
+      {{getCurrentStudentName()}}
+    </span>
+  </div>
+  
+  <div class="w-full px-[100px]">
+    <div class="relative overflow-x-auto w-full">
+      <!-- Blue header accent -->
+      <div class="absolute w-full flex top-0">
+        <div class="h-2 w-4/5 mx-auto bg-[#042A4F] rounded-t-full"></div>
+      </div>
+      
+      <!-- Warnings Table -->
+      <table class="w-full mt-2 z-10 bg-white rounded-lg border border-gray-300 shadow-md">
+        <thead class="bg-[#f8f9fa]">
+          <tr class="text-xl font-semibold">
+            <th class="border border-gray-300 p-3 text-right w-[250px]">المادة</th>
+            <th class="border border-gray-300 p-3">الإنذار الأول</th>
+            <th class="border border-gray-300 p-3">الإنذار الثاني</th>
+           
+          </tr>
+        </thead>
+
+        <tbody class="text-center">
+          <tr *ngFor="let course of studentWarnings" class="hover:bg-gray-50">
+            <td class="border border-gray-300 p-3 text-right">{{course.name}}</td>
+            <td class="border border-gray-300 p-3">
+              <div [class.text-red-500]="course.firstWarning" class="flex justify-center">
+                <span *ngIf="course.firstWarning; else emptyCell" (click)="toggleWarning(course, 'firstWarning')" class="cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </span>
+                <ng-template #emptyCell>
+                  <span (click)="toggleWarning(course, 'firstWarning')" class="cursor-pointer">—</span>
+                </ng-template>
+              </div>
+            </td>
+            <td class="border border-gray-300 p-3">
+              <div [class.text-red-500]="course.secondWarning" class="flex justify-center">
+                <span *ngIf="course.secondWarning; else emptyCell2" (click)="toggleWarning(course, 'secondWarning')" class="cursor-pointer">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </span>
+                <ng-template #emptyCell2>
+                  <span (click)="toggleWarning(course, 'secondWarning')" class="cursor-pointer">—</span>
+                </ng-template>
+              </div>
+            </td>
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
